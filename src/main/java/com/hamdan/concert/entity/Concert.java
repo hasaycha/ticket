@@ -17,6 +17,7 @@ import lombok.Setter;
 import java.io.Serial;
 import java.math.BigDecimal;
 import java.sql.Time;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -44,6 +45,16 @@ public class Concert extends BaseEntity {
     @Column(nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
     @Builder.Default
     private BigDecimal price = BigDecimal.ZERO;
+
+    @Column(name = "all_date", nullable = false)
+    @Builder.Default
+    private Boolean allDate = true;
+
+    @Column(name = "date_from")
+    private Date dateFrom;
+
+    @Column(name = "date_to")
+    private Date dateTo;
 
     @Column(name = "all_time", nullable = false)
     @Builder.Default

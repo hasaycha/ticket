@@ -25,6 +25,11 @@
             <column defaultValueNumeric="0.00" name="price" type="Decimal(10,2)">
                 <constraints nullable="false"/>
             </column>
+            <column name="all_date" type="BOOLEAN" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_from" type="DATE"/>
+            <column name="date_to" type="DATE"/>
             <column name="all_time" type="BOOLEAN" defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
@@ -35,5 +40,24 @@
     <changeSet id="1719059069141-2" author="hamdanrijali">
         <addUniqueConstraint columnNames="code" constraintName="concert_code" tableName="concert"/>
     </changeSet>
-
+    <changeSet id="1719059069141-3" author="hamdanrijali">
+        <createIndex tableName="concert" indexName="idx_date_based">
+            <column name="all_time">
+            </column>
+            <column name="date_from">
+            </column>
+            <column name="date_to">
+            </column>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1719059069141-4" author="hamdanrijali">
+        <createIndex tableName="concert" indexName="idx_time_based">
+            <column name="all_date">
+            </column>
+            <column name="time_from">
+            </column>
+            <column name="time_to">
+            </column>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>

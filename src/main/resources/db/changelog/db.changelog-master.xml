@@ -1,0 +1,15 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="db/changelog/2024/06/22-concert-table-changelog.xml"/>
+
+    <include file="db/changelog/2024/06/22-customer-table-changelog.xml"/>
+
+    <include file="db/changelog/2024/06/22-ticket-detail-table-changelog.xml"/>
+
+    <include file="db/changelog/2024/06/22-ticket-table-changelog.xml"/>
+
+    <include file="db/changelog/2024/06/22-transaction-table-changelog.xml"/>
+
+</databaseChangeLog>

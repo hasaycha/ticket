@@ -17,6 +17,7 @@ Project is created with:
 * Mysql version 8
 * Java version 17
 * Liquibase for Database Migration
+* API Documentation using OpenApi Swagger can open in `http://localhost:8080/api/docs`
 
 ## Setup
 To run this project
@@ -29,6 +30,7 @@ To run this project
 7. Modify `application.yml` file for database connection
 8. run application, example `./mvnw spring-boot:run`
 9. check database it should automatically create tables
+10. Access `http://localhost:8080/api/docs` for checking API documentation
 
 ## Test Environment
 This Application has unit test and also already tested using Jmeter for handling mechanism for race booking <br />

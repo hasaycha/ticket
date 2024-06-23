@@ -16,6 +16,7 @@ Project is created with:
 * Spring boot version 3.3.1
 * Mysql version 8
 * Java version 17
+* Liquibase for Database Migration
 
 ## Setup
 To run this project
@@ -26,6 +27,7 @@ To run this project
 5. clone project from github `https://github.com/hasaycha/ticket.git`
 6. duplicate and rename `src/main/resource/application.yml.example` into `src/main/resource/application.yml`
 7. run application, example `./mvnw spring-boot:run`
+8. check database it should automatically create tables
 
 ## Test Environment
 This Application has unit test and also already tested using Jmeter for handling mechanism for race booking <br />

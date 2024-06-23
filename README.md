@@ -26,6 +26,7 @@ To run this project
 4. Create Database with name `reservation`
 5. clone project from github `https://github.com/hasaycha/ticket.git`
 6. duplicate and rename `src/main/resource/application.yml.example` into `src/main/resource/application.yml`
+7. Modify `application.yml` file for database connection
 7. run application, example `./mvnw spring-boot:run`
 8. check database it should automatically create tables
 

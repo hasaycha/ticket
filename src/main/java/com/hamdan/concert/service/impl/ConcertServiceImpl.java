@@ -5,10 +5,12 @@ import com.hamdan.concert.entity.Concert;
 import com.hamdan.concert.entity.Customer;
 import com.hamdan.concert.entity.Transaction;
 import com.hamdan.concert.enums.MessageResponse;
+import com.hamdan.concert.handler.exception.BusinessBadRequestException;
 import com.hamdan.concert.handler.exception.BusinessNoContentException;
 import com.hamdan.concert.handler.exception.BusinessNotFoundException;
 import com.hamdan.concert.model.base.ResponseApi;
 import com.hamdan.concert.model.request.BookingConcertRequest;
+import com.hamdan.concert.model.request.CreateConcertRequest;
 import com.hamdan.concert.model.response.BookingTicketConcertResponse;
 import com.hamdan.concert.model.response.GetConcertResponse;
 import com.hamdan.concert.repository.ConcertRepository;
@@ -26,6 +28,7 @@ import java.math.BigDecimal;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service("concertService")
@@ -92,6 +95,31 @@ public class ConcertServiceImpl implements ConcertService {
         transactionRepository.save(trx);
 
         return new ResponseApi<>(buildBookingTicketConcertResponse(trx));
+    }
+
+    @Transactional
+    @Override
+    public ResponseApi<GetConcertResponse> createConcert(CreateConcertRequest createConcertRequest) {
+        String code = CustomUtil.generateConcertCode(createConcertRequest.getName());
+
+        Optional<Concert> concertOpt = concertRepository.findByCode(code);
+        if (concertOpt.isPresent()) {
+            throw new BusinessBadRequestException(MessageResponse.CONCERT_EXIST);
+        }
+
+        Concert concert = Concert.builder()
+                .name(createConcertRequest.getName())
+                .code(code)
+                .quota(createConcertRequest.getQuota())
+                .price(createConcertRequest.getPrice())
+                .timeFrom(Time.valueOf(createConcertRequest.getTimeFrom()))
+                .timeTo(Time.valueOf(createConcertRequest.getTimeTo()))
+                .build();
+
+        concertRepository.save(concert);
+
+        GetConcertResponse response = ObjectMapperUtil.convertValue(concert, GetConcertResponse.class);
+        return new ResponseApi<>(response);
     }
 
     private BookingTicketConcertResponse buildBookingTicketConcertResponse(Transaction trx) {

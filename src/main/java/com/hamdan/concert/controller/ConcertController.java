@@ -2,6 +2,7 @@ package com.hamdan.concert.controller;
 
 import com.hamdan.concert.model.base.ResponseApi;
 import com.hamdan.concert.model.request.BookingConcertRequest;
+import com.hamdan.concert.model.request.CreateConcertRequest;
 import com.hamdan.concert.model.response.BookingTicketConcertResponse;
 import com.hamdan.concert.model.response.GetConcertResponse;
 import com.hamdan.concert.service.ConcertService;
@@ -29,6 +30,17 @@ import java.util.List;
 @Validated
 public class ConcertController {
     private final ConcertService concertService;
+
+    @Operation(summary = "Create concert")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success Create concert"),
+            @ApiResponse(responseCode = "400", description = "Invalid data request", content = @Content),
+    })
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseApi<GetConcertResponse> createConcert(@Valid @RequestBody CreateConcertRequest createConcertRequest) {
+        return concertService.createConcert(createConcertRequest);
+    }
 
     @Operation(summary = "Get All Available Concert")
     @ApiResponses(value = {

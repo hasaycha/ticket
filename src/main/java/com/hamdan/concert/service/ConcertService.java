@@ -2,6 +2,7 @@ package com.hamdan.concert.service;
 
 import com.hamdan.concert.model.base.ResponseApi;
 import com.hamdan.concert.model.request.BookingConcertRequest;
+import com.hamdan.concert.model.request.CreateConcertRequest;
 import com.hamdan.concert.model.response.BookingTicketConcertResponse;
 import com.hamdan.concert.model.response.GetConcertResponse;
 
@@ -13,4 +14,6 @@ public interface ConcertService {
     ResponseApi<GetConcertResponse> getByCodeAndAvailabilityConcert(String code);
 
     ResponseApi<BookingTicketConcertResponse> bookingConcert(String code, BookingConcertRequest bookingConcertRequest);
+
+    ResponseApi<GetConcertResponse> createConcert(CreateConcertRequest createConcertRequest);
 }

@@ -36,4 +36,6 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
             "where " +
             "c.code = ?1 and ?2 >= c.timeFrom and c.timeTo >= ?2 and c.quota >= ?3")
     Optional<Concert> findByCodeAndAvailability(String code, Time currentTime, Integer qty);
+
+    Optional<Concert> findByCode(String code);
 }

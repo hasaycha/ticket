@@ -3,16 +3,11 @@ package com.hamdan.concert.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hamdan.concert.entity.base.BaseEntity;
-import com.hamdan.concert.enums.TicketStatus;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +17,6 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Entity
 @Table
@@ -46,6 +40,9 @@ public class Transaction extends BaseEntity {
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Customer customer;
+
+    @Column(nullable = false, length = 100)
+    private String code;
 
     @Column(nullable = false)
     private Integer qty;

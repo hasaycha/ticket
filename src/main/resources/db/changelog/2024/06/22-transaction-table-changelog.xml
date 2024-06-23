@@ -5,29 +5,39 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1719059069145-1" author="hamdanrijali">
+    <changeSet id="1719059069143-1" author="hamdanrijali">
         <createTable tableName="transaction">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_transaction"/>
             </column>
-            <column name="created_at" type="DATETIME"/>
+            <column name="concert_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="qty" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0.00" name="total_price" type="Decimal(14,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0.00" name="price" type="Decimal(14,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
             <column name="updated_at" type="DATETIME"/>
             <column name="deleted_at" type="DATETIME"/>
-            <column name="ticket_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="transaction_number" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="version" type="BIGINT" defaultValueNumeric="0"/>
         </createTable>
     </changeSet>
-    <changeSet id="1719059069145-2" author="hamdanrijali">
-        <addUniqueConstraint columnNames="ticket_id, transaction_number"
-                             constraintName="transaction_ticket_id_trx_num"
-                             tableName="transaction"/>
+    <changeSet id="1719059069143-2" author="hamdanrijali">
+        <createIndex tableName="transaction" indexName="idx_transaction_concert_id_customer_id">
+            <column name="concert_id">
+            </column>
+            <column name="customer_id">
+            </column>
+        </createIndex>
     </changeSet>
 
 </databaseChangeLog>

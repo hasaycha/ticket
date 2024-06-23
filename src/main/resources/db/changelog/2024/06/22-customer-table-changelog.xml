@@ -10,13 +10,14 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_customer"/>
             </column>
-            <column name="created_at" type="DATETIME"/>
-            <column name="updated_at" type="DATETIME"/>
-            <column name="deleted_at" type="DATETIME"/>
             <column name="email" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(100)"/>
+            <column name="created_at" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="deleted_at" type="DATETIME"/>
+            <column name="version" type="BIGINT" defaultValueNumeric="0"/>
         </createTable>
     </changeSet>
     <changeSet id="1719059069142-2" author="hamdanrijali">

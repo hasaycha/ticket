@@ -7,17 +7,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
-@MappedSuperclass
 @Getter
 @Setter
-public class BaseEntity implements Serializable {
+@MappedSuperclass
+public abstract class BaseEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 8011172563855580164L;
@@ -25,24 +26,28 @@ public class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    protected Long id;
+    private Long id;
 
-    @Column(name = "created_at")
-    protected Date createdAt;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private OffsetDateTime createdAt;
 
     @Column(name = "updated_at")
-    private Date updatedAt;
+    private OffsetDateTime updatedAt;
 
     @Column(name = "deleted_at")
-    private Date deletedAt;
+    private OffsetDateTime deletedAt;
+
+    @Column
+    @Version
+    private Long version;
 
     @PrePersist
     protected void onCreate() {
-        createdAt = new Date();
+        createdAt = OffsetDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = new Date();
+        updatedAt = OffsetDateTime.now();
     }
 }

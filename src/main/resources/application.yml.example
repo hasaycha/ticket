@@ -13,3 +13,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
   jpa:
     open-in-view: false
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /api/docs

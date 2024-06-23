@@ -2,11 +2,8 @@ package com.hamdan.concert.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hamdan.concert.entity.base.BaseEntity;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,8 +14,6 @@ import lombok.Setter;
 import java.io.Serial;
 import java.math.BigDecimal;
 import java.sql.Time;
-import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table
@@ -42,31 +37,13 @@ public class Concert extends BaseEntity {
     @Column(nullable = false)
     private Integer quota;
 
-    @Column(nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
+    @Column(nullable = false, columnDefinition = "Decimal(14,2) default '0.00'")
     @Builder.Default
     private BigDecimal price = BigDecimal.ZERO;
 
-    @Column(name = "all_date", nullable = false)
-    @Builder.Default
-    private Boolean allDate = true;
-
-    @Column(name = "date_from")
-    private Date dateFrom;
-
-    @Column(name = "date_to")
-    private Date dateTo;
-
-    @Column(name = "all_time", nullable = false)
-    @Builder.Default
-    private Boolean allTime = true;
-
-    @Column(name = "time_from")
+    @Column(name = "time_from", nullable = false)
     private Time timeFrom;
 
-    @Column(name = "time_to")
+    @Column(name = "time_to", nullable = false)
     private Time timeTo;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "concert_id")
-    private Set<Ticket> tickets;
 }

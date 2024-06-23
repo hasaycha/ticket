@@ -3,14 +3,16 @@ package com.hamdan.concert.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hamdan.concert.entity.base.BaseEntity;
-import com.hamdan.concert.enums.TransactionStatus;
+import com.hamdan.concert.enums.TicketStatus;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +21,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serial;
+import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table
@@ -31,17 +35,26 @@ import java.io.Serial;
 public class Transaction extends BaseEntity {
 
     @Serial
-    private static final long serialVersionUID = -3386220737544258080L;
+    private static final long serialVersionUID = 2370070804162253849L;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_id", nullable = false, referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "concert_id", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Ticket ticket;
+    private Concert concert;
 
-    @Column(name = "transaction_number", nullable = false)
-    private String transactionNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Customer customer;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TransactionStatus status;
+    private Integer qty;
+
+    @Column(name = "total_price", nullable = false, columnDefinition = "Decimal(14,2) default '0.00'")
+    @Builder.Default
+    private BigDecimal totalPrice = BigDecimal.ZERO;
+
+    @Column(nullable = false, columnDefinition = "Decimal(14,2) default '0.00'")
+    @Builder.Default
+    private BigDecimal price = BigDecimal.ZERO;
 }

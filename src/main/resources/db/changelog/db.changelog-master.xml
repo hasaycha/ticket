@@ -6,10 +6,6 @@
 
     <include file="db/changelog/2024/06/22-customer-table-changelog.xml"/>
 
-    <include file="db/changelog/2024/06/22-ticket-detail-table-changelog.xml"/>
-
-    <include file="db/changelog/2024/06/22-ticket-table-changelog.xml"/>
-
     <include file="db/changelog/2024/06/22-transaction-table-changelog.xml"/>
 
 </databaseChangeLog>

@@ -10,9 +10,6 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_concert"/>
             </column>
-            <column name="created_at" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
-            <column name="updated_at" type="DATETIME"/>
-            <column name="deleted_at" type="DATETIME"/>
             <column name="name" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
@@ -22,37 +19,29 @@
             <column name="quota" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValueNumeric="0.00" name="price" type="Decimal(10,2)">
+            <column defaultValueNumeric="0.00" name="price" type="Decimal(14,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="all_date" type="BOOLEAN" defaultValueBoolean="true">
+            <column name="time_from" type="TIME">
                 <constraints nullable="false"/>
             </column>
-            <column name="date_from" type="DATE"/>
-            <column name="date_to" type="DATE"/>
-            <column name="all_time" type="BOOLEAN" defaultValueBoolean="true">
+            <column name="time_to" type="TIME">
                 <constraints nullable="false"/>
             </column>
-            <column name="time_from" type="TIME"/>
-            <column name="time_to" type="TIME"/>
+            <column name="created_at" type="DATETIME" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="deleted_at" type="DATETIME"/>
+            <column name="version" type="BIGINT" defaultValueNumeric="0"/>
         </createTable>
     </changeSet>
     <changeSet id="1719059069141-2" author="hamdanrijali">
         <addUniqueConstraint columnNames="code" constraintName="concert_code" tableName="concert"/>
     </changeSet>
     <changeSet id="1719059069141-3" author="hamdanrijali">
-        <createIndex tableName="concert" indexName="idx_date_based">
-            <column name="all_time">
+        <createIndex tableName="concert" indexName="idx_code_quota_time_based">
+            <column name="code">
             </column>
-            <column name="date_from">
-            </column>
-            <column name="date_to">
-            </column>
-        </createIndex>
-    </changeSet>
-    <changeSet id="1719059069141-4" author="hamdanrijali">
-        <createIndex tableName="concert" indexName="idx_time_based">
-            <column name="all_date">
+            <column name="quota">
             </column>
             <column name="time_from">
             </column>

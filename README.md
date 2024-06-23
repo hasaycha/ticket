@@ -2,6 +2,7 @@
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Test Environment](#test-environment)
 
 ## General info
 This Project is for Technical Assessment in EDTS. <br />

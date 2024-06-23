@@ -22,9 +22,10 @@ To run this project
 1. Install JDK 17
 2. Install maven
 3. Install Mysql 8
-4. clone project from github `https://github.com/hasaycha/ticket.git`
-5. duplicate and rename `src/main/resource/application.yml.example` into `src/main/resource/application.yml`
-6. run application, example `./mvnw spring-boot:run`
+4. Create Database with name `reservation`
+5. clone project from github `https://github.com/hasaycha/ticket.git`
+6. duplicate and rename `src/main/resource/application.yml.example` into `src/main/resource/application.yml`
+7. run application, example `./mvnw spring-boot:run`
 
 ## Test Environment
 This Application has unit test and also already tested using Jmeter for handling mechanism for race booking <br />

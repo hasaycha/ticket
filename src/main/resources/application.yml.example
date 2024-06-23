@@ -14,6 +14,21 @@ spring:
   jpa:
     open-in-view: false
 springdoc:
+  api-docs:
+    path: /api-docs
   swagger-ui:
-    enabled: true
     path: /api/docs
+management:
+  health:
+    readinessState:
+      enabled: 'true'
+    livenessState:
+      enabled: 'true'
+  endpoint:
+    health:
+      probes:
+        enabled: 'true'
+  endpoints:
+    web:
+      exposure:
+        include: health, info
